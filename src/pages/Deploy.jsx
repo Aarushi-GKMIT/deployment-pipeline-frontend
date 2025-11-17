@@ -104,7 +104,7 @@ export default function Deploy() {
             <Header />
             <div style={containerStyle}>
                 <div style={boxStyle}>
-                    <h2 style={titleStyle}>🚀 Deploy Project</h2>
+                    <h2 style={titleStyle}>Deploy Project</h2>
                     <p style={subtitleStyle}>Click below to start deployment for your project.</p>
 
                     <form onSubmit={handleSubmit}>

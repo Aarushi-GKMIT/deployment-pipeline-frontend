@@ -1,9 +1,13 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+import Project from "./pages/Project";
+import Deploy from "./pages/Deploy";
+import AuthGuard from "./AuthGuard";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./index.css";
+import AccessDenied from "./pages/AccessDenied";
 
 function App() {
     return (
@@ -14,7 +18,12 @@ function App() {
                     <Route path="/" element={<Signup />} />
                     <Route path="/signup" element={<Signup />} />
                     <Route path="/login" element={<Login />} />
-                </Routes>
+                    <Route element={<AuthGuard />}>
+                        <Route path="/project" element={<Project />} />
+                        <Route path="/deploy" element={<Deploy />} />
+                        <Route path="/access-denied" element={<AccessDenied />} />
+                    </Route>
+                </Routes>       
             </div>
         </Router>
     );

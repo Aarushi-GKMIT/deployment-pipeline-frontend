@@ -41,7 +41,7 @@ export default function Header() {
 
     return (
         <header style={headerStyle}>
-            <h1 style={titleStyle}>DeploymentJS</h1>
+            <h1 style={titleStyle}>React Deployment Pipeline Platform</h1>
             <button
                 style={buttonStyle}
                 onClick={handleLogout}

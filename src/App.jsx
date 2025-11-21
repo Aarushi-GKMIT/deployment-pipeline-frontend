@@ -4,6 +4,9 @@ import Login from "./pages/Login";
 import Project from "./pages/Project";
 import Deploy from "./pages/Deploy";
 import AuthGuard from "./AuthGuard";
+import Result from "./pages/Result";
+import GrantPermission from "./pages/GrantPermission";
+import AdminDashboard from "./pages/AdminDashboard";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./index.css";
@@ -21,6 +24,9 @@ function App() {
                     <Route element={<AuthGuard />}>
                         <Route path="/project" element={<Project />} />
                         <Route path="/deploy" element={<Deploy />} />
+                        <Route path="/result" element={<Result />} />
+                        <Route path="/grant-permission" element={<GrantPermission />} />
+                        <Route path="/admin-dashboard" element={<AdminDashboard />} />
                         <Route path="/access-denied" element={<AccessDenied />} />
                     </Route>
                 </Routes>       

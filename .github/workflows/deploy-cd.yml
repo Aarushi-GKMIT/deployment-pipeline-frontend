@@ -1,0 +1,42 @@
+name: CD Pipeline - Node Backend
+
+on:
+    workflow_dispatch:
+    push:
+        branches:
+            - feature/admin-dashboard
+            - feature/ci-cd
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # 1. Setup SSH
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/ec2_key.pem
+          chmod 600 ~/.ssh/ec2_key.pem
+          ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+
+      # 2. Deploy to EC2
+      - name: Deploy to EC2
+        run: |
+          ssh -i ~/.ssh/ec2_key.pem ubuntu@${{ secrets.EC2_HOST }} "
+            cd /home/ubuntu/deployment-pipeline-frontend && \
+
+            echo 'Pulling latest code' && \
+            git pull origin feature/admin-dashboard && \
+
+            echo 'Installing dependencies' && \
+            npm install && \
+
+            echo 'Restarting PM2' && \
+            pm2 delete all && \
+
+            pm2 start npm --name frontend -- run dev && \
+
+            pm2 save
+          "
